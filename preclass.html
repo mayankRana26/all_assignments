@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="myInput">
+    <button onclick="display()" id="myButton">Submit</button>
+    <h2 id="adding_text"></h2>
+</body>
+<script>
+function display(){
+   let res= document.getElementById("myInput").value
+    let res2=document.getElementById("adding_text");
+    res2.innerText= "Entered value: "+res
+    if(res==""){
+        res2.innerText="Fill the input field for output"
+    }
+
+}
+
+</script>
+</html>
