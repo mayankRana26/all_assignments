@@ -1,83 +1,107 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <style>
+        h1 {
+            color: teal;
+            margin-left: 37%;
+            font-size: 37px;
+            margin-bottom: 40px;
+        }
+        #main {
+            height: 350px;
+            width: 25%;
+            display: grid;
+            grid-template-columns: repeat(1,1fr);
+            grid-template-rows: repeat(20%,76%);
+            margin-left: 35%;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        }
+        #Dis{
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        }
+       #main>div{
+        width: 72%;
+        margin: auto;
+        margin-top:30px;
+        margin-bottom: 2px;
+        border-radius: 7px;
+       }
+       #Numb{
+        display:grid;
+        grid-template-columns: repeat(4,1fr);
+        grid-template-rows: repeat(4,50px);
+        gap:5px;
+      
+       }
+       #Numb>div{
+        padding-top: 12px;
+        text-align: center;
+        font-weight: bolder;
+        border-radius: 7px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+       
+    }
+    #Numb > div:hover {
+    background-color: yellowgreen; /* Change the background color on hover */
+    /* box-shadow: rgba(72, 93, 50, 0.5) 0px 8px 16px -2px, rgba(0, 0, 0, 0.6) 0px 4px 8px -4px; Modify the box shadow on hover */
+}
+       .opera{
+        background-color: black;
+        color: white;
+       }
+       #red{
+        background-color: red;
+        color: white;
+       }
+    </style>
 </head>
+
 <body>
-    <h2 id="dis"></h2>
-   <div class="num">
-    <button>1</button>
-    <button>2</button>
-    <button>3</button>
-    <button>4</button>
-    <button>5</button>
-    <button>6</button>
-    <button>7</button>
-    <button>8</button>
-    <button>9</button>
-    <button>0</button>
-   </div> 
-   <div class="operator">
-    <button>+</button>
-    <button>-</button>
-    <button>*</button>
-    <button>/</button>
-   </div>
-   <button id="equal">=</button>
+    <h1>Masai Calculator</h1>
+    <div id="main">
+        <div id="Dis"></div>
+        <div id="Numb">
+
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div class="opera">+</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div class="opera">-</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div class="opera">*</div>
+            <div id="red">C</div>
+            <div>0</div>
+            <div class="opera">=</div>
+            <div class="opera">/</div>
+        </div>
+    </div>
 </body>
 <script>
-    let Numbtn =document.querySelectorAll(".num > button");
-    let opbtn=document.querySelectorAll(".operator > button");
-    let eqbtn=document.getElementById("equal")
-    let Disbtn=document.getElementById("dis")
-
-    let firstNum="";
-    let secondNum="";
-    let IsFirst= true;
-    let operators="";
-    eqbtn.addEventListener("click",function()
-    {
-        Disbtn.innerText=calculate(firstNum,secondNum,operators)
-    })
-
-    for(let i=0;i<Numbtn.length;i++)
-    {
-        Numbtn[i].addEventListener("click",function()
-        {   
-            if(IsFirst==true)
-            {
-            firstNum += Numbtn[i].innerText;
-            Disbtn.innerText = firstNum
-            }
-            else{
-            secondNum += Numbtn[i].innerText;
-            Disbtn.innerText = secondNum
-            }
-        })
+ let num1=document.querySelectorAll("#Numb>div");
+ for(let i=0;i<num1.length;i++){
+    num1[i].addEventListener("click",cal)
+ } 
+ let res="";
+ function cal(event){
+    let op=event.target.innerText;
+    if(op=="C"){
+        res="";
+        document.querySelector("#Dis").innerText="";
+    }else if (op=="="){
+        document.querySelector("#Dis").innerText=eval(res)
+    }else {
+        res +=op;
+        document.querySelector("#Dis").innerText=res
     }
-
-    for(let i=0;i<opbtn.length;i++)
-    {
-        opbtn[i].addEventListener("click",function()
-        {
-         IsFirst = false ;
-         operators=opbtn[i].innerText  
-        })
-    }
-    function calculate(firstNum,secondNum,operators)
-    {
-        switch (operators){
-            case "+":
-                return +firstNum + +secondNum
-                case "-":
-                return +firstNum - +secondNum
-                case "*":
-                return +firstNum * +secondNum
-                case "/":
-                return +firstNum / +secondNum
-        }
-    }
+ }
+ 
 </script>
 </html>
