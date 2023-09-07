@@ -1,0 +1,30 @@
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+  margin: auto;
+  margin-top: 20px;
+  text-align: center;
+}
+
+table td,
+table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+form {
+  width: 20%; /* Adjust the width of the form */
+  height: 350px;
+  padding-left: 50px;
+  /* border: 1px solid red; */
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  margin-top: 20px;
+}
+div {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Adjust alignment as needed */
+  margin: 20px; /* Adjust margin as needed */
+}
