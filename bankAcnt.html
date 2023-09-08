@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function BankAccount(accountNumber, name, type,balance){
+            this.accountNumber=accountNumber;
+            this.name=name;
+            this.type=type;
+            this.balance=balance;
+            this.active=true;
+        }
+        BankAccount.prototype.deposit= function(amount){
+            if(amount>0){
+                this.balance+=amount
+                console.log(`Deposited ${amount}. New balance ${balance} `)
+            }else{
+                console.log(`Invailid Amount`)
+            }
+        }
+        BankAccount.prototype.withdraw= function(amount){
+            if(amount>0 && this.active==true && this.balance>=amount){
+                this.balance+=amount
+                console.log(`Withdrwan ${amount}. New balance ${balance} `)
+            }else{
+                console.log(`Invailid amount or  Insufficient Balance`)
+            }
+        }
+       function getTotalBalance(accounts){
+            let Total=0;
+            for(let acc of accounts){
+                if(acc.active) Total+=acc.balance
+            }
+            return Total;
+        }
+        let acount1=new BankAccount(1,"a","saving",20000)
+        let acount2=new BankAccount(1,"b","saving",15000)
+        let acount3=new BankAccount(3,"c","saving",10000)
+        // console.log(acount1)
+        let arr=[acount1,acount2,acount3]
+        console.log("total  "+ getTotalBalance(arr));
+    </script>
+</body>
+</html>
