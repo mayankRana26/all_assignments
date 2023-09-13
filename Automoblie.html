@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Motor</h1>
+</body>
+<script>
+ function Automobile(NaMe, model, year) {
+  this.NaMe = NaMe;
+  this.model = model;
+  this.year = year;
+}
+Automobile.prototype.FuelType=function(){
+  console.log("petrol")
+}
+function fourWheeler(NaMe, model, year,TyPe){
+ Automobile.call(this,NaMe, model, year)
+ this.TyPe=TyPe
+} 
+fourWheeler.prototype=Object.create(Automobile.prototype)
+fourWheeler.prototype.f2=function(){
+  console.log("f2")
+}
+let fourWheeler1= new fourWheeler("Aulto","old",2001,"fuel")
+console.log(fourWheeler1)
+
+</script>
+</html>
