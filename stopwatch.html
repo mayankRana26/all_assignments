@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stopwatch</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        #main,#btns{
+            width: 30%;
+            height: 100px;
+            color: white;
+
+        }
+
+
+                #bdr {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 10px solid white;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            position: relative; /* Add this line */
+            padding:1.1px 1.3px 1.1px 1.3px;
+        }
+
+        #stopwatch {
+    border: 10px solid rgba(17, 16, 16, 0.683); /* Reduced border width */
+    width: 99.7%;
+    border-radius: 50%;
+    height: 99.7%;
+    color: white;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 1000;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* White glow effect */
+    /* margin: 1px 1px 1px 1px; */
+}
+
+
+
+
+
+        /* #btns{
+
+        } */
+        #main,#stopwatch,#btns,#bdr{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div id ="main"><h1>Stopwatch</h1></div>
+    <div id="bdr">
+    <div id="stopwatch" style="color: white;">00:00:00</div>
+</div>
+    <div id="btns">
+    <button id="startStopButton" onclick="startStop()">Start</button>
+    <button id="resetButton" onclick="reset()">Reset</button>
+</div>
+
+    <script>
+        let startTime;
+        let running = false;
+
+        function startStop() {
+            if (running) {
+                clearInterval(startTime);
+                document.getElementById("startStopButton").textContent = "Start";
+            } else {
+                startTime = setInterval(updateTime, 1000);
+                document.getElementById("startStopButton").textContent = "Stop";
+            }
+            running = !running;
+        }
+
+        function updateTime() {
+            let stopwatch = document.getElementById("stopwatch");
+            let currentTime = stopwatch.textContent.split(":");
+            let hours = parseInt(currentTime[0]);
+            let minutes = parseInt(currentTime[1]);
+            let seconds = parseInt(currentTime[2]);
+
+            seconds++;
+
+            if (seconds === 60) {
+                seconds = 0;
+                minutes++;
+
+                if (minutes === 60) {
+                    minutes = 0;
+                    hours++;
+                }
+            }
+
+            stopwatch.textContent = 
+                (hours < 10 ? "0" + hours : hours) + ":" +
+                (minutes < 10 ? "0" + minutes : minutes) + ":" +
+                (seconds < 10 ? "0" + seconds : seconds);
+        }
+
+        function reset() {
+            clearInterval(startTime);
+            document.getElementById("startStopButton").textContent = "Start";
+            document.getElementById("stopwatch").textContent = "00:00:00";
+            running = false;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+          body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        #timer-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            color: #777;
+        }
+
+        #timer {
+            font-size: 2rem;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="timer-container">
+        <h1 style="color: red;">cap05_009's Timer</h1>
+        <div>
+            <label for="hours">Hours:</label>
+            <input type="number" id="hours" value="0">
+        </div>
+        <div>
+            <label for="minutes">Minutes:</label>
+            <input type="number" id="minutes" value="0">
+        </div>
+        <div>
+            <label for="seconds">Seconds:</label>
+            <input type="number" id="seconds" value="0">
+        </div>
+        <div>
+            <button id="start">Start</button>
+            <button id="pause" disabled>Pause</button>
+            <button id="reset" disabled>Reset</button>
+        </div>
+        <div id="timer">00:00:00</div>
+    </div>
+</body>
+<script>
+    let h = document.getElementById("hours");
+    let m = document.getElementById("minutes");
+    let sec = document.getElementById("seconds");
+    let strt = document.getElementById("start");
+    let pau = document.getElementById("pause");
+    let res = document.getElementById("reset");
+    let dis = document.getElementById("timer");
+    let interval;
+    let hour, mint, secnd;
+    let Paused = false;
+
+    function Time() {
+        if (hour <= 0 && mint <= 0 && secnd <= 0) {
+            clearInterval(interval);
+            strt.disabled = false;
+        } else {
+            secnd--;
+
+            if (secnd === -1) {
+                secnd = 59;
+                mint--;
+
+                if (mint === -1) {
+                    mint = 59;
+                    hour--;
+                }
+            }
+
+            dis.textContent =
+                (hour < 10 ? "0" + hour : hour) + ":" +
+                (mint < 10 ? "0" + mint : mint) + ":" +
+                (secnd < 10 ? "0" + secnd : secnd);
+                dis.style.color="green"
+        }
+
+    }
+
+    strt.addEventListener("click", function () {
+        if (!Paused) {
+            hour = +(h.value);
+            mint = +(m.value);
+            secnd = +(sec.value);
+        }
+        interval = setInterval(Time, 1000);
+        strt.disabled = true;
+        pau.disabled = false;
+        res.disabled = false;
+        Paused = false;
+        
+    });
+
+    pau.addEventListener("click", function () {
+        clearInterval(interval);
+        strt.disabled = false;
+        pau.disabled = true;
+        res.disabled = false;
+        Paused = true;
+        dis.style.color="red"
+    });
+
+    res.addEventListener("click", function () {
+        clearInterval(interval);
+        dis.textContent = "00:00:00";
+        strt.disabled = false;
+        pau.disabled = true;
+        res.disabled = true;
+        Paused = false;
+        dis.style.color="yellow"
+    });
+</script>
+</html>
