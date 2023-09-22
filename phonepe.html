@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .processing-message {
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .success-message {
+            text-align: center;
+            font-size: 24px;
+            color: #4CAF50;
+        }
+
+        .error-message {
+            text-align: center;
+            font-size: 24px;
+            color: #FF5733;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment System</h1>
+        <button id="pay" class="payment-button">Make Payment</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function Payment() {
+            return new Promise(function(resolve, reject){
+                setTimeout(() => {
+                    const isPaymentAccepted = true; 
+                    if (isPaymentAccepted) {
+                        resolve();
+                    } else {
+                        reject();
+                    }
+                }, 2000);
+            });
+        }
+
+        document.getElementById("pay").addEventListener("click", function() {
+            const makePayment = document.getElementById("pay");
+            const Result = document.getElementById("result");
+            makePayment.disabled = true;
+            makePayment.textContent = "Processing...";
+            Payment()
+                .then(() => {
+                    Result.innerHTML = '<div class="success-message">Payment Successful !</div>';
+                })
+                .catch(() => {
+                    Result.innerHTML = '<div class="error-message">Payment Failed. Please try again.</div>';
+                })
+                .finally(() => {
+                    makePayment.disabled = false;
+                    makePayment.textContent = "Make Payment";
+                });
+        });
+    </script>
+</body>
+</html>
